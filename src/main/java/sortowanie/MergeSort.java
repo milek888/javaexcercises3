@@ -7,8 +7,6 @@ import java.util.Arrays;
 //https://www.geeksforgeeks.org/merge-sort/
 public class MergeSort {
 
-
-
     public static void sort(int[] elements, int start, int end) {
         if (start >= end) {
             return;
@@ -19,7 +17,6 @@ public class MergeSort {
         merge(elements, start, mid, end);
 
     }
-
     private static void merge(int[] elements, int start, int mid, int end) {
         int[] left = Arrays.copyOfRange(elements, start, mid + 1);
         int[] right = Arrays.copyOfRange(elements, mid + 1, end + 1);
