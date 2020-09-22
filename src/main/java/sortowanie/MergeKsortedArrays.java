@@ -10,7 +10,7 @@ import java.util.PriorityQueue;
  *
  * */
 public class MergeKsortedArrays {
-//test
+
     //-----------------------------------------Sposob 1---------------------------------------
 
     static int[] mergeKSortedArrays(int[][] arr, int start, int end) {
