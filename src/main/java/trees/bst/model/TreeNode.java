@@ -1,4 +1,4 @@
-package trees;
+package trees.bst.model;
 
 public class TreeNode {
     private int val;
