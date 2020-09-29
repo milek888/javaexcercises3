@@ -1,4 +1,6 @@
-package trees;
+package trees.bst.treetraversal;
+
+import trees.bst.model.TreeNode;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

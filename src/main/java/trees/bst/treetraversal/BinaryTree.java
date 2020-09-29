@@ -1,4 +1,6 @@
-package trees;
+package trees.bst.treetraversal;
+
+import trees.bst.model.TreeNode;
 
 //https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/
 //https://towardsdatascience.com/4-types-of-tree-traversal-algorithms-d56328450846

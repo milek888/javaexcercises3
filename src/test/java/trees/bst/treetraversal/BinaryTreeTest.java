@@ -1,9 +1,9 @@
-package trees;
+package trees.bst.treetraversal;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import trees.bst.model.TreeNode;
+import trees.bst.treetraversal.BinaryTree;
 
 class BinaryTreeTest {//TODO refactor tests
 

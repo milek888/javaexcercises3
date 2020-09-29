@@ -1,7 +1,10 @@
-package trees;
+package trees.bst.treetraversal;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import trees.bst.model.TreeNode;
+import trees.bst.treetraversal.BinaryTreeStack;
+
 
 import java.util.List;
 
