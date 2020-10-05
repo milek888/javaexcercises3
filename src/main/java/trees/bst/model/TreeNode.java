@@ -44,4 +44,12 @@ public class TreeNode {
     public void setRight(TreeNode right) {
         this.right = right;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("TreeNode{");
+        sb.append("val=").append(val);
+        sb.append('}');
+        return sb.toString();
+    }
 }

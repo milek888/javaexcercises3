@@ -1,20 +1,32 @@
 package trees.bst.treeoperations;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Stack;
 
 public class BstImpl implements Bst {
 
     int rangeSum;//TODO figure out something else then instance var
+    //--------------------------------------------------------LeetCode 437. Path Sum III-------------------------------------------------
+    /*
+     *LeetCode 437. Path Sum III
+     * https://leetcode.com/problems/path-sum-iii/
+     * */
+    int counter;
     private TreeNode root;
 
     public BstImpl() {
     }
 
+    //--------------------------------------------------98. Validate Binary Search Tree----------------------------------------------------------------
+
     public BstImpl(TreeNode root) {
         this.root = root;
     }
 
-    //--------------------------------------------------98. Validate Binary Search Tree----------------------------------------------------------------
+    //--------------------------------------------------108. Convert Sorted Array----------------------------------------------------------------
 
     //Leetcode 98. Validate Binary Search Tree
     //https://leetcode.com/problems/validate-binary-search-tree/
@@ -33,7 +45,15 @@ public class BstImpl implements Bst {
                 isBST(node.right, node.val, upper);//kazde wejscie do prawego wezla (i tylko wejscie do prawego wezla) zmienia dolny limit <=> wszystkie wezly w podrzewie musza byc wieksze od dolnego limit
     }
 
-    //--------------------------------------------------108. Convert Sorted Array----------------------------------------------------------------
+
+    //--------------------------------------------------------Search BST----------------------------------------------------------
+
+
+    //----------------------------------------------------Insert to BST--------------------------------------------------------------
+
+
+    //---------------------------------------------------------LeetCode 112. Path Sum---------------------------------------------------------
+
 
     //LeetCode 108. Convert Sorted Array to Binary Search Tree
     //https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
@@ -52,8 +72,6 @@ public class BstImpl implements Bst {
         return root;
     }
 
-    //--------------------------------------------------------Search BST----------------------------------------------------------
-
     //https://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/
     @Override
     public TreeNode search(TreeNode node, int val) {
@@ -67,7 +85,7 @@ public class BstImpl implements Bst {
         return search(node.right, val);
     }
 
-    //----------------------------------------------------Insert to BST--------------------------------------------------------------
+    //-----------------------------------------------------------LeetCode 113. Path Sum II-------------------------------------------------------------------------
 
     @Override
     public void insert(int val) {
@@ -87,8 +105,6 @@ public class BstImpl implements Bst {
         /* return the (unchanged) node pointer*/
         return node;
     }
-
-    //---------------------------------------------------------LeetCode 112. Path Sum---------------------------------------------------------
 
     //-----------------moje rozwiazanie------------------
     //LeetCode 112. Path Sum
@@ -122,7 +138,7 @@ public class BstImpl implements Bst {
         return hasPathSum2(root.left, sum) || hasPathSum2(root.right, sum);
     }
 
-    //---------------rozwiazanie ze stosem-----------------
+    //---------------rozwiazanie ze stosem Preorder-----------------
     public boolean hasPathSumStack(TreeNode root, int sum) {
         if (root == null) {
             return false;
@@ -155,22 +171,100 @@ public class BstImpl implements Bst {
         return false;
     }
 
-   //-----------------------------------------------------------LeetCode 113. Path Sum II-------------------------------------------------------------------------
+    //---------------rozwiazanie ze stosem Inorder-----------------
+
+    public boolean hasPathSumStackInorder(TreeNode root, int sum) {
+        Stack<Integer> pathSums = new Stack<>();
+        int currSum = 0;
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode next = root;
+
+        while (!stack.isEmpty() || next != null) {
+            if (next != null) {
+                stack.push(next);
+                currSum += next.val;
+                pathSums.push(currSum);
+                next = next.left;
+            } else {
+                TreeNode node = stack.pop();
+                if (node.left == null && node.right == null && currSum == sum) {
+                    return true;
+                }
+                currSum -= node.val;
+                System.out.println(node.val);
+                next = node.right;
+
+            }
+        }
+        return false;
+    }
+
+    //------------------------------------------------------------Range Sum of BST------------------------------------------------------
 
     /*
-    * LeetCode 113. Path Sum II
-    * https://leetcode.com/problems/path-sum-ii/
-    *
-    * */
+     * LeetCode 113. Path Sum II
+     * https://leetcode.com/problems/path-sum-ii/
+     *
+     * */
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        int curSum = 0;
+        ArrayList<Integer> path = new ArrayList<>();
+        List<List<Integer>> paths = new ArrayList<>();
+        return pathSumUtil(root, sum, paths, curSum, path);
+    }
 
-    //------------------------------------------------------delete val in BST------------------------------------------------------------
+    private List<List<Integer>> pathSumUtil(TreeNode root, int sum, List<List<Integer>> paths, int curSum, ArrayList<Integer> path) {
+        if (root == null) {
+            return paths;
+        }
+
+        curSum += root.val;
+        path.add(root.val);
+        if (root.left == null && root.right == null && curSum == sum) {
+            paths.add(new ArrayList<>(path));
+        }
+
+        pathSumUtil(root.left, sum, paths, curSum, path);
+        pathSumUtil(root.right, sum, paths, curSum, path);
+        path.remove(path.size() - 1);
+        return paths;
+    }
+
+    public int pathSum3(TreeNode root, int sum) {
+        HashMap<Integer, Integer> frequencies = new HashMap<>();
+        int currentSum = 0;
+        recursivePreOrder(root, sum, frequencies, currentSum);
+        return counter;
+    }
+
+    private int recursivePreOrder(TreeNode root, int sum, HashMap<Integer, Integer> frequencies, int currentSum) {
+        if (root == null) {
+            return counter;
+        }
+        System.out.println(root.val);
+        currentSum += root.val;
+        if (currentSum == sum) {
+            counter++;
+        }
+
+        counter += frequencies.getOrDefault(currentSum - sum, 0);
+        frequencies.merge(currentSum, 1, Integer::sum);
+
+        recursivePreOrder(root.left, sum, frequencies, currentSum);
+        recursivePreOrder(root.right, sum, frequencies, currentSum);
+        frequencies.put(currentSum, frequencies.get(currentSum) - 1);
+
+        return counter;
+    }
+
+    //-------------------------------------------------------------------------------------------------------------------------
 
     @Override
     public void delete(int val) {
 
     }
 
-    //------------------------------------------------------------Range Sum of BST------------------------------------------------------
+    //------------------------------------------------------------------Powtorka----------------------------------------------
 
     //938. Range Sum of BST
     //https://leetcode.com/problems/range-sum-of-bst/
@@ -216,8 +310,152 @@ public class BstImpl implements Bst {
         root.right = root.left;
         root.left = temp;
     }
+//----------------------------------------------------------------------------Powtorka---------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------Powtorka cd. pre, in, postorder recusively----------------
+
+    public void revisionPreorderRecursive(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        System.out.println(root.val);
+        revisionPreorderRecursive(root.left);
+        revisionPreorderRecursive(root.right);
+    }
+
+    public void revisionInorderRecursive(TreeNode node) {
+        if (node == null) {
+            return;
+        }
+        revisionInorderRecursive(node.left);
+        System.out.print(node.val + " ");
+        revisionInorderRecursive(node.right);
+    }
+
+    public void revisionPostorderRecursive(TreeNode node) {
+        if (node == null) {
+            return;
+        }
+        revisionPostorderRecursive(node.left);
+        revisionPostorderRecursive(node.right);
+        System.out.print(node.val + " ");
+    }
+
+    //--------------Powtorka cd. pre, in, postorder with stack----------------
+
+    public void revisionPreorderWithStack(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        TreeNode currNode = root;
+        Stack<TreeNode> stack = new Stack<>();
+
+        stack.push(currNode);
+        while (!stack.isEmpty()) {
+
+            currNode = stack.pop();
+
+            System.out.println(currNode.val);
+
+            if (currNode.right != null) {
+                stack.push(currNode.right);
+            }
+            if (currNode.left != null) {
+                stack.push(currNode.left);
+            }
+        }
+    }
+
+    public void revisionInorderWithStack(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode currNode = root;
+
+        while (!stack.isEmpty() || currNode != null) {
+            if (currNode != null) {
+                stack.push(currNode);
+                currNode = currNode.left;
+            } else {
+                TreeNode node = stack.pop();
+                System.out.println(node.val);
+                currNode = node.right;
+
+            }
+        }
+    }
+
+    //https://www.geeksforgeeks.org/iterative-postorder-traversal/?ref=lbp
+    public List<TreeNode> revisionPostorderWithStack(TreeNode root) {
+        LinkedList<TreeNode> out = new LinkedList<>();
+        if (root == null) {
+            return out;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode currNode = root;
+
+        stack.push(currNode);
+        while (!stack.isEmpty()) {
+            currNode = stack.pop();
+            out.addFirst(currNode);
+
+            if (currNode.left != null) {
+                stack.push(currNode.left);
+            }
+            if (currNode.right != null) {
+                stack.push(currNode.right);
+            }
+        }
+
+        return out;
+    }
+
+    //https://leetcode.com/problems/invert-binary-tree/
+    public TreeNode revisionInvertTree(TreeNode root) {
+        if (root != null) {
+            revisionInvertTree(root.left);
+            revisionInvertTree(root.right);
+            TreeNode temp = root.left;
+            root.left = root.right;
+            root.right = temp;
+        }
+        return root;
+    }
+
+    /*
+     * LeetCode 113. Path Sum II
+     * https://leetcode.com/problems/path-sum-ii/
+     *
+     * */
+    public boolean revisionHasSumStackInorder(TreeNode root, int sum) {
+        Stack<Integer> pathSums = new Stack<>();
+        int currSum = 0;
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode next = root;
+
+        while (!stack.isEmpty() || next != null) {
+            if (next != null) {
+                stack.push(next);
+                currSum += next.val;
+                pathSums.push(currSum);
+                next = next.left;
+            } else {
+                TreeNode node = stack.pop();
+                if (node.left == null && node.right == null && currSum == sum) {
+                    return true;
+                }
+                currSum -= node.val;
+                System.out.println(node.val);
+                next = node.right;
+
+            }
+        }
+        return false;
+    }
+
+
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //---------------------------------------------------------Helpers---------------------------------------------------------
 
     public TreeNode initTree2() {
      /*   TreeNode treeNode5 = new TreeNode(6);
@@ -230,6 +468,15 @@ public class BstImpl implements Bst {
         TreeNode treeNode3 = new TreeNode(70, treeNode4, treeNode5);
         TreeNode treeNode1 = new TreeNode(13, treeNode2, treeNode3);
         return treeNode1;
+    }
+
+    public TreeNode initTree3() {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        return root;
     }
 
     //----------------------------------------------------
@@ -245,12 +492,18 @@ public class BstImpl implements Bst {
 
         public TreeNode(int val) {
             this.val = val;
+            left = right = null;
         }
 
         public TreeNode(int val, TreeNode left, TreeNode right) {
             this.val = val;
             this.left = left;
             this.right = right;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(val);
         }
     }
 }
