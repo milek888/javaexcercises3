@@ -40,6 +40,7 @@ public class SortKsortedArray {
         }
     }
 
+    //Insertion sort
     public static void insertionSort(int[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
             int j = i + 1;

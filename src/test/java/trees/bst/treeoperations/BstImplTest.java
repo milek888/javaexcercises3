@@ -135,6 +135,14 @@ class BstImplTest {//TODO refactor all tests
 
     }
 
+    @Test
+    void treeFromArrayTest() {
+        BstImpl bst = new BstImpl();
+        BstImpl.TreeNode root = bst.anyArrayToBST(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 17});
+        bst.revisionPreorderRecursive(root);
+        System.out.println("---------------------------------------------------------------------");
+    }
+
     //------------------------------------------------------Powtorka---------------------------------------------------------
 
     @Test
@@ -206,4 +214,28 @@ class BstImplTest {//TODO refactor all tests
         System.out.println("---------------------------------------------------------------------");
     }
 
+    @Test
+    void revisionHasSumRecursiveTest() {
+        BstImpl bst = new BstImpl();
+        BstImpl.TreeNode root = bst.sortedArrayToBST(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 17});
+        boolean actualResult = bst.revisionHasSumRecursive(root, 47);
+        System.out.println("---------------------------------------------------------------------");
+    }
+
+
+    @Test
+    void revisionIsBSTTest() {//TODO test with tree which is not BST
+        BstImpl bst = new BstImpl();
+        BstImpl.TreeNode root = bst.sortedArrayToBST(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 17});
+        boolean actualResult = bst.revisionIsBST(root, null, null);
+        System.out.println("---------------------------------------------------------------------");
+    }
+
+    @Test
+    void revisionPathSumTest() {
+        BstImpl bst = new BstImpl();
+        BstImpl.TreeNode root = bst.sortedArrayToBST(new int[]{1, 2, 1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 17});
+        List<List<Integer>> actualResult = bst.revisionPathSum(root,15);
+        System.out.println("---------------------------------------------------------------------");
+    }
 }

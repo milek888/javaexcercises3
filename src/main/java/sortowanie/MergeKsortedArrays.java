@@ -5,13 +5,16 @@ import java.util.PriorityQueue;
 
 /*
  * https://www.programcreek.com/2014/05/merge-k-sorted-arrays-in-java/
- * https://medium.com/outco/how-to-merge-k-sorted-arrays-c35d87aa298e - bardzo fajnie wytlumaczone
+ * https://medium.com/outco/how-to-merge-k-sorted-arrays-c35d87aa298e <---- bardzo fajnie wytlumaczone
+ * https://www.hackerearth.com/practice/notes/heaps-and-priority-queues/ <---- operacje na Heap-ie fajnie wytlumaczone
  * https://www.geeksforgeeks.org/merge-k-sorted-arrays/
  *
  * */
 public class MergeKsortedArrays {
 
     //-----------------------------------------Sposob 1---------------------------------------
+
+    //-------------------------------------------------------------------------------------------------------------
 
     static int[] mergeKSortedArrays(int[][] arr, int start, int end) {
 
@@ -29,6 +32,8 @@ public class MergeKsortedArrays {
         int[] result = mergeTwoArrays(left, right);
         return result;
     }
+
+    //-----------------------------------------Sposob 2---------------------------------------
 
     static private int[] mergeTwoArrays(int[] arr1, int[] arr2) {
         int i = 0;
@@ -53,18 +58,6 @@ public class MergeKsortedArrays {
         return result;
     }
 
-    //-----------------------------------------Sposob 2---------------------------------------
-
-    static int[] mergeKSortedArraysBottomUp(int[][] arr) {
-        if (arr.length == 1) {
-            return arr[0];
-        }
-        for (int i = 1; i < arr.length; i++) {
-            arr[0] = mergeTwoArrays(arr[i], arr[0]);
-        }
-        return arr[0];
-    }
-
     //-----------------------------------------Sposob 3---------------------------------------
 
 /*    static int[] mergeKSortedArraysBottomUp2(int[][] arr, int k) {
@@ -86,12 +79,22 @@ public class MergeKsortedArrays {
 
     //-----------------------------------------Sposob 4---------------------------------------
 
+    static int[] mergeKSortedArraysBottomUp(int[][] arr) {
+        if (arr.length == 1) {
+            return arr[0];
+        }
+        for (int i = 1; i < arr.length; i++) {
+            arr[0] = mergeTwoArrays(arr[i], arr[0]);
+        }
+        return arr[0];
+    }
+
     //!!! bardzo fajnie wytlumaczone
     //https://medium.com/outco/how-to-merge-k-sorted-arrays-c35d87aa298e
     //I tu fajne zrozumiale rozwiazanie https://www.programcreek.com/2014/05/merge-k-sorted-arrays-in-java/
     static int[] mergeKSortedArraysUsingHeap(int[][] arr) {
 
-        Comparator<ArrayNode> comparator = (n1, n2) -> n1.getArr()[n1.getIndex()] - n2.getArr()[n2.getIndex()];
+        Comparator<ArrayNode> comparator = Comparator.comparing(ArrayNode::getIndex);
         PriorityQueue<ArrayNode> arrayNodes = new PriorityQueue<>(comparator);
 
         int totalElements = 0;
@@ -113,9 +116,38 @@ public class MergeKsortedArrays {
         return result;
     }
 
+    //TODO --------------------------------------------------Powtorka---skasowac------------------------------------------------
+
+    //TODO powtorka skasowac
+    static int[] mergeKSortedArraysUsingHeapRevision(int[][] arr) {
+        int K = arr.length;
+        int N = arr[0].length;
+        Comparator<ArrayNode> comparator = Comparator.comparing(ArrayNode::getIndex);
+        PriorityQueue<ArrayNode> heap = new PriorityQueue<>(comparator);
+        for (int i = 0; i < arr.length; i++) {
+            heap.add(new ArrayNode(arr[i], 0));
+        }
+
+        int[] result = new int[N * K];
+        int i = 0;
+        while (!heap.isEmpty()) {
+            ArrayNode minNode = heap.poll();
+            result[i++] = minNode.arr[minNode.index];
+
+            if (minNode.index < N-1) {
+                minNode.index++;
+                heap.add(minNode);
+            }
+        }
+
+        return result;
+    }
+
+    //TODO------------------------------------------Powtorka end--------------------------------------------------------
+
     static class ArrayNode {
-        private int[] arr;
-        private int index;
+        public int[] arr;
+        public int index;
 
         public ArrayNode(int[] arr, int index) {
             this.arr = arr;

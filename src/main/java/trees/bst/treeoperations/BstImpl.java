@@ -1,6 +1,7 @@
 package trees.bst.treeoperations;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,11 +37,12 @@ public class BstImpl implements Bst {
         if (node == null)
             return true;
 
+        //2) A tutaj ↓ sprawdzamy po wejsciu.  Te dwa ify to sprawdzamy warunki ze wezel podrewa jest  dolny limit < wezel < od gornego limitu. Jesli ktorys z tych warunkow nie spelniony zwracamy false
         if (lower != null && node.val <= lower)
             return false;
         if (upper != null && node.val >= upper)
-            return false;
-
+            return false;              //1) tutaj ustawiamy limity i wchodzimy
+        //↓
         return isBST(node.left, lower, node.val) &&//kazde wejscie do lewego wezla (i tylko wejscie do lewego wezla) zmienia gorny limit <=> wszystkie wezly podrzewamusza byc mniejsze od gornego limitu
                 isBST(node.right, node.val, upper);//kazde wejscie do prawego wezla (i tylko wejscie do prawego wezla) zmienia dolny limit <=> wszystkie wezly w podrzewie musza byc wieksze od dolnego limit
     }
@@ -264,8 +266,6 @@ public class BstImpl implements Bst {
 
     }
 
-    //------------------------------------------------------------------Powtorka----------------------------------------------
-
     //938. Range Sum of BST
     //https://leetcode.com/problems/range-sum-of-bst/
     public int rangeSumBST(TreeNode current, int min, int max) {
@@ -310,6 +310,33 @@ public class BstImpl implements Bst {
         root.right = root.left;
         root.left = temp;
     }
+
+    //construct balanced bst from given keys
+    // https://www.techiedelight.com/construct-balanced-bst-given-keys/
+    public TreeNode anyArrayToBST(int[] keys) {
+        Arrays.sort(keys); //TODO <= remember about it
+        return anyArrayToBSTHelper(keys, 0, keys.length - 1);
+    }
+
+    private TreeNode anyArrayToBSTHelper(int[] keys, int left, int right) {
+        //for edge cases
+        TreeNode root = new TreeNode(0);
+        if (keys == null || keys.length == 0) {
+            return root;
+        }
+
+        int mid = (left + right) / 2;
+        root = new TreeNode(keys[mid]);
+        if (left <= mid - 1) {
+            root.left = anyArrayToBSTHelper(keys, left, mid - 1);
+        }
+        if (right >= mid + 1) {
+            root.right = anyArrayToBSTHelper(keys, mid + 1, right);
+        }
+
+        return root;
+    }
+
 //----------------------------------------------------------------------------Powtorka---------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -446,10 +473,68 @@ public class BstImpl implements Bst {
                 currSum -= node.val;
                 System.out.println(node.val);
                 next = node.right;
-
             }
         }
         return false;
+    }
+
+    public boolean revisionHasSumRecursive(TreeNode root, int sum) {
+        int currSum = 0;
+        return revisionHasSumRecursiveHelper(root, sum, currSum);
+    }
+
+    private boolean revisionHasSumRecursiveHelper(TreeNode root, int sum, int currSum) {
+        if (root == null) {
+            return false;
+        }
+        boolean result = false;
+        currSum += root.val;
+        if (root.left == null && root.right == null && currSum == sum) {
+            return true;
+        }
+        return revisionHasSumRecursiveHelper(root.left, sum, currSum) || revisionHasSumRecursiveHelper(root.right, sum, currSum);
+    }
+
+    public boolean revisionIsBST(TreeNode node, Integer lower, Integer upper) {
+        if (node == null) {
+            return true;
+        }
+        if (lower != null && node.val < lower) {
+            return false;
+        }
+        if (upper != null && node.val > upper) {
+            return false;
+        }
+        return revisionIsBST(node.left, lower, node.val) && revisionIsBST(node.right, node.val, upper);
+    }
+
+    /*
+     * LeetCode 113. Path Sum II
+     * https://leetcode.com/problems/path-sum-ii/
+     *
+     * */
+    public List<List<Integer>> revisionPathSum(TreeNode root, int sum) {
+        List<List<Integer>> paths = new ArrayList<>();
+        int currSum = 0;
+        List<Integer> tempPath = new ArrayList<>();
+        revisionPathSumUtil(root, sum, paths, currSum, tempPath);
+        return paths;
+    }
+
+    private void /*List<List<Integer>>*/ revisionPathSumUtil(TreeNode node, int sum, List<List<Integer>> paths, int currSum, List<Integer> tempPath) {
+        if (node == null) {
+            return;
+        }
+
+        currSum += node.val;
+        tempPath.add(node.val);
+        if (node.left == null && node.right == null && sum == currSum) {
+            paths.add(new ArrayList<>(tempPath));
+        }
+
+        revisionPathSumUtil(node.left, sum, paths, currSum, tempPath);
+        revisionPathSumUtil(node.right, sum, paths, currSum, tempPath);
+        tempPath.remove(tempPath.size() - 1);
     }
 
 

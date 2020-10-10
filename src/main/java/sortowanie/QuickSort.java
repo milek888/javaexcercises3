@@ -7,13 +7,12 @@ public class QuickSort {
 
     //http://strefakodera.pl/algorytmy/algorytmy-sortowania/przerabiamy-algorytm-quicksort-z-wersji-rekurencyjnej-na-nierekurencyjna
     public static void sort2(int[] tab, int left, int right) {
-        if (right <= left)
+        if (right <= left) {
             return;
-        else {
-            int q = partition( tab,  left, right)  ;
-            sort2(tab,  q+1, right);
-            sort2(tab,  left, q-1);
         }
+        int q = partition( tab,  left, right)  ;
+        sort2(tab,  q+1, right);
+        sort2(tab,  left, q-1);
     }
 
     private static int partition(int[] tab, int left, int right) {
