@@ -2,6 +2,7 @@ package sortowanie;
 
 import org.junit.jupiter.api.Test;
 
+import javax.script.Compilable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -46,5 +47,22 @@ class MergeKSortedListsTest {//TODO improve tests add generator provider
         list[2].next.next = new ListNode(10);
 
         return list;
+    }
+
+    private ListNode arrayToList(int[] arr ){
+        ListNode head = new ListNode();
+        ListNode temp = head;
+
+        for (int item: arr) {
+            ListNode node = new ListNode(item);
+            temp.next = node;
+            temp = node;
+        }
+
+        return head.next;
+    }
+
+    private void printList(ListNode node){
+
     }
 }
