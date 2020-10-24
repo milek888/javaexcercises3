@@ -3,6 +3,10 @@ package stack;
 import java.util.Map;
 import java.util.Stack;
 
+/*
+* 20. Valid Parentheses
+* https://leetcode.com/problems/valid-parentheses/
+* */
 public class ValidParentheses {
     private Stack<String> stackParentheses;
     private final Map<String, String> mapParentheses;
