@@ -1,6 +1,5 @@
 package arrays;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
 /*
@@ -12,8 +11,9 @@ https://leetcode.com/problems/subarray-sum-equals-k/
 public class SubarraySumEqualsTarget {
 
     public static int subarraySum(int[] nums, int k) {
-        int currentSum = 0, counter = 0;
-        HashMap<Integer, Integer> frequencies = new HashMap<>();
+        int currentSum = 0; //to są kolejne sumy przyrostowe
+        int counter = 0;
+        HashMap<Integer, Integer> frequencies = new HashMap<>();//to zawiera ile razy dana suma przyrostowa dotychczas wystapila
 
         for (int number : nums) {
             currentSum += number;
@@ -21,7 +21,7 @@ public class SubarraySumEqualsTarget {
             if (currentSum == k) {
                 counter++;
             }
-            counter += frequencies.getOrDefault(currentSum-k, 0);
+            counter += frequencies.getOrDefault(currentSum - k, 0);
             frequencies.merge(currentSum, 1, Integer::sum);
         }
 

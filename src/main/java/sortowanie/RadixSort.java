@@ -1,8 +1,14 @@
 package sortowanie;
 
 import java.util.Arrays;
+/*
+Dobrze opisane
+   programiz.com/dsa/radix-sort
+Najkrotsza wersja
+   https://knpcode.com/java-programs/radix-sort-java-program/
+   https://www.sanfoundry.com/java-program-implement-radix-sort/
+*/
 
-//Fajnie zaimplementowane  https://pl.qwe.wiki/wiki/Radix_sort
 public class RadixSort {
 
     public static void radixSort(int arr[]) {

@@ -5,11 +5,25 @@ package dynamicprogramming.other;
 * */
 public class BuySellStock {
 
+    public int maxProfitTheBestSolution(int[] prices) {
+        if (prices == null) {
+            return 0;
+        }
+        int maxTransaction = 0;//In this case, no transaction is done, i.e. max profit = 0.
+        int currentMin = Integer.MAX_VALUE;
+
+        for (int i =0; i<prices.length;i++) {
+            currentMin = Integer.min(currentMin, prices[i]);
+            maxTransaction = Integer.max(maxTransaction, prices[i] - currentMin);
+        }
+        return maxTransaction;
+    }
+
     public int maxProfit(int[] prices) {
         if(prices == null ||prices.length == 0) {
             return 0;
         }
-        int tempMax = 0;
+        int tempMax = 0;//tempMax, tempMin, globalMin oznaczaja ceny nie zysk
         int tempMin = Integer.MAX_VALUE;    //odpowiedz bedzie w tempMin, tempMax
         int globalMin = Integer.MAX_VALUE;
 
@@ -17,6 +31,7 @@ public class BuySellStock {
             tempMax = Integer.max(tempMax, price);      //jesli znajdziemy nowe max to aktualizujemy tempMax bo zawsze mozemy sprzedac po wyzszej cenie
             globalMin = Integer.min(globalMin, price);  //aktualizujemy globalMin
 
+            //!! To porownanie jest wazne
             if (tempMax - tempMin < price - globalMin) {    //jedyna wartosc ktora moze zagrozic dotychczasowemu wynikowi to nowa najnizsza cena
                 tempMin = globalMin;                        //nowa najwyzsza nie zagraza bo dotychczasowy wynik i tak z niej korzysta bo mu ja zawsze aktualizujemy
                 tempMax = price;                            // jak znajdziemy lebsza cene do sprzedazy. Mozna te nie wprost zapytac czy mniejsza wartosc

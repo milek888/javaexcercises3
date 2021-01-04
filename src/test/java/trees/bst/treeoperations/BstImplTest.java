@@ -3,6 +3,7 @@ package trees.bst.treeoperations;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -101,7 +102,7 @@ class BstImplTest {//TODO refactor all tests
     void getPathsTest() {
         BstImpl bst = new BstImpl();
         BstImpl.TreeNode root = bst.sortedArrayToBST(new int[]{1, 2, 3, 4, 6, 7, 9});
-        List<List<Integer>> actualPaths = bst.pathSum(root, 9);
+        ArrayList<ArrayList<Integer>> actualPaths = bst.pathSum(root, 9);
         List<List<Integer>> expectedPaths = null;
         /*        assertEquals(expectedResult, actualResult);*/
     }
@@ -110,7 +111,7 @@ class BstImplTest {//TODO refactor all tests
     void getPathsTest2() {
         BstImpl bst = new BstImpl();
         BstImpl.TreeNode root = bst.sortedArrayToBST(new int[]{1, 2, 3, 4, 6, 7, 9});
-        List<List<Integer>> actualPaths = bst.pathSum(root, 17);
+        ArrayList<ArrayList<Integer>> actualPaths = bst.pathSum(root, 17);
         List<List<Integer>> expectedPaths = null;
         /*       assertEquals(expectedResult, actualResult);*/
     }
@@ -119,7 +120,7 @@ class BstImplTest {//TODO refactor all tests
     void getPathsTest4() {
         BstImpl bst = new BstImpl();
         BstImpl.TreeNode root = bst.sortedArrayToBST(new int[]{});
-        List<List<Integer>> actualPaths = bst.pathSum(root, 17);
+        ArrayList<ArrayList<Integer>> actualPaths = bst.pathSum(root, 17);
         List<List<Integer>> expectedPaths = null;
         /*        assertEquals(expectedResult, actualResult);*/
     }

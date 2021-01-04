@@ -208,14 +208,14 @@ public class BstImpl implements Bst {
      * https://leetcode.com/problems/path-sum-ii/
      *
      * */
-    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+    public ArrayList<ArrayList<Integer>> pathSum(TreeNode root, int sum) {
         int curSum = 0;
-        ArrayList<Integer> path = new ArrayList<>();
-        List<List<Integer>> paths = new ArrayList<>();
+        LinkedList<Integer> path = new LinkedList<>();
+        ArrayList<ArrayList<Integer>> paths = new ArrayList<>();
         return pathSumUtil(root, sum, paths, curSum, path);
     }
 
-    private List<List<Integer>> pathSumUtil(TreeNode root, int sum, List<List<Integer>> paths, int curSum, ArrayList<Integer> path) {
+    private ArrayList<ArrayList<Integer>> pathSumUtil(TreeNode root, int sum, ArrayList<ArrayList<Integer>> paths, int curSum, LinkedList<Integer> path) {
         if (root == null) {
             return paths;
         }
@@ -232,6 +232,11 @@ public class BstImpl implements Bst {
         return paths;
     }
 
+    //------------------------------------------------------------Path Sum III------------------------------------------------------
+    /*
+    * 437. Path Sum III
+    * https://leetcode.com/problems/path-sum-iii/
+    * */
     public int pathSum3(TreeNode root, int sum) {
         HashMap<Integer, Integer> frequencies = new HashMap<>();
         int currentSum = 0;
