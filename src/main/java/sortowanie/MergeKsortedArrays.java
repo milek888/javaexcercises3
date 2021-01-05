@@ -94,7 +94,7 @@ public class MergeKsortedArrays {
     //I tu fajne zrozumiale rozwiazanie https://www.programcreek.com/2014/05/merge-k-sorted-arrays-in-java/
     static int[] mergeKSortedArraysUsingHeap(int[][] arr) {
 
-        Comparator<ArrayNode> comparator = Comparator.comparing(ArrayNode::getIndex);
+        Comparator<ArrayNode> comparator = Comparator.comparingInt(n -> n.arr[n.index]);
         PriorityQueue<ArrayNode> arrayNodes = new PriorityQueue<>(comparator);
 
         int totalElements = 0;
@@ -107,9 +107,9 @@ public class MergeKsortedArrays {
         int i = 0;
         while (!arrayNodes.isEmpty()) {
             ArrayNode node = arrayNodes.poll();
-            result[i++] = node.getArr()[node.getIndex()];
-            if (node.getIndex() < node.getArr().length - 1) {
-                arrayNodes.add(new ArrayNode(node.getArr(), node.getIndex() + 1));
+            result[i++] = node.arr[node.index];
+            if (node.getIndex() < node.arr.length - 1) {
+                arrayNodes.add(new ArrayNode(node.arr, node.index + 1));
             }
         }
 
