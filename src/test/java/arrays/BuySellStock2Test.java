@@ -61,4 +61,13 @@ class BuySellStock2Test {
         int expectedProfit = 65;
         assertEquals(expectedProfit, actualProfit);
     }
+
+
+    @Test
+    void maxProfit4() {
+        int[] prices = {7,6,4,3,1};
+        int actualProfit = buySellStock2.maxProfit(prices);
+        int expectedProfit = 0;
+        assertEquals(expectedProfit, actualProfit);
+    }
 }

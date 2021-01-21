@@ -17,6 +17,11 @@ class ReversePolishNotationRevisionTest {
                 Arguments.arguments(new String[]{"4", "13", "5", "/", "+"}, 6));
     }
 
+    private static Stream<Arguments> argumentProvider2() {
+        return Stream.of(Arguments.arguments(new String[]{"2.0", "1.0", "+", "3.0", "*"}, 9.0),
+                Arguments.arguments(new String[]{"4.0", "15.0", "5.0", "/", "+"}, 7.0));
+    }
+
     @BeforeEach
     void setUp() {
         notationRevision = new ReversePolishNotationRevision();
@@ -26,6 +31,13 @@ class ReversePolishNotationRevisionTest {
     @MethodSource("argumentProvider")
     void evalRPN(String[] tokens, int expectedResult) {
         int actualResult = notationRevision.evalRPN(tokens);
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @ParameterizedTest
+    @MethodSource("argumentProvider2")
+    void evalRPN2(String[] tokens, double expectedResult) {
+        double actualResult = notationRevision.evalRPN2(tokens);
         assertEquals(expectedResult, actualResult);
     }
 }

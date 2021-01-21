@@ -22,7 +22,7 @@ public class SubarraySumEqualsTarget {
                 counter++;
             }
             counter += frequencies.getOrDefault(currentSum - k, 0);
-            frequencies.merge(currentSum, 1, Integer::sum);
+            frequencies.merge(currentSum, 1, Integer::sum);//aktualizuje czestosc kolejnej sumy przyrostowej
         }
 
         return counter;

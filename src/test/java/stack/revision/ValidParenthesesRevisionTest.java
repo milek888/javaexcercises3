@@ -31,4 +31,20 @@ class ValidParenthesesRevisionTest {
         boolean actualResult = validParenthesesRevision.isValid(input);
         assertEquals(expectedResult, actualResult);
     }
+
+
+    @ParameterizedTest
+    //https://www.codingrevolution.com/junit-5-parameterized-tests/
+    //https://mkyong.com/junit5/junit-5-parameterized-tests/
+    //Mozna uzyc roznych typow
+    @CsvSource({
+            "()[]{}, true",
+            "(], false",
+            "([)], false",
+            "{[()]()}, true"
+    })
+    void isValid2(String input, boolean expectedResult) {
+        boolean actualResult = validParenthesesRevision.isValid2(input);
+        assertEquals(expectedResult, actualResult);
+    }
 }
