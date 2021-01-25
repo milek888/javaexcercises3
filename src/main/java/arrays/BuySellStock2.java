@@ -7,7 +7,7 @@ package arrays;
  * */
 public class BuySellStock2 {
 
-    public int maxProfit(int[] prices) {
+    public static int maxProfit(int[] prices) {
         if (prices == null) {
             return 0;
         }

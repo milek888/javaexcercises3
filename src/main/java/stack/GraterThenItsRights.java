@@ -1,6 +1,7 @@
 package stack;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
@@ -22,32 +23,32 @@ public class GraterThenItsRights {
         Stack<Integer> stackNumbers = new Stack<>();
 
         for (int number : numbers) {
-            while (!stackNumbers.empty() && stackNumbers.peek() < number) {
-                stackNumbers.pop();
+            while (!stackNumbers.empty() && stackNumbers.peek() < number) {//2) a potem jak znajdziemy dla niej wieksza to ja wyrzuacamy ze stosu
+                stackNumbers.pop();                                             //Generalnie wypireprzamy ze stosu wszystkie dla ktorych znalezlismy wieksza
             }
-            stackNumbers.push(number);
+            stackNumbers.push(number);//1) kazda liczbe zawsze wrzucamy na stos
         }
 
 /*        stackNumbers.stream().collect(toList()).forEach(System.out::println);*///TODO how to convert list to primitive array
 
         int[] result = new int[stackNumbers.size()];
-        int i = 0;
+        int i = stackNumbers.size()-1;
         while (!stackNumbers.empty()) {
             result[i] = stackNumbers.pop();
-            i++;
+            i--;
         }
         return result;
     }
 
 
     public static List<Integer> findGreaterThenTheirRightsArray(int[] numbers) {
-        List<Integer> result = new ArrayList<>();
+        LinkedList<Integer> result = new LinkedList<>();
 
         int maxTemp = Integer.MIN_VALUE;
         for(int i=numbers.length-1; i>=0;i--) {//TODO how to create a new array and add to it elements
             if(maxTemp < numbers[i]) {
                 maxTemp = numbers[i];
-                result.add(maxTemp);
+                result.addFirst(maxTemp);
             }
         }
 

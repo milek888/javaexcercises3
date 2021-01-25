@@ -3,6 +3,10 @@ package stack;
 import java.util.Set;
 import java.util.Stack;
 
+/*
+  71. Simplify Path
+* https://leetcode.com/problems/simplify-path/
+* */
 public class SimplifyPathCorrect {
 
     final Set<String> minninglessOperators = Set.of("", ".");
