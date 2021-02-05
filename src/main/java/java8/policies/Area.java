@@ -1,4 +1,4 @@
-package arrays.java8.policies;
+package java8.policies;
 
 import java.util.Objects;
 

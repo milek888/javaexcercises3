@@ -1,4 +1,4 @@
-package arrays.java8.policies;
+package java8.policies;
 
 public class Policy {
 

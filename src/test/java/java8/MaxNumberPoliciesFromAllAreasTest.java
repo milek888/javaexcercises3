@@ -1,8 +1,8 @@
-package arrays.java8;
+package java8;
 
-import arrays.java8.policies.Area;
-import arrays.java8.policies.MaxNumberPoliciesFromAllAreas;
-import arrays.java8.policies.Policy;
+import java8.policies.Area;
+import java8.policies.MaxNumberPoliciesFromAllAreas;
+import java8.policies.Policy;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

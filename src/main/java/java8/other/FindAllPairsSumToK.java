@@ -1,6 +1,5 @@
-package arrays.java8.other;
+package java8.other;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
