@@ -1,0 +1,12 @@
+System.getProperty("line.separator") <---------- zwraca line separator w biezacym systemie
+line separator w
+           Linux \n
+           Windows \r\n
+Jak zbadac ze cos jest bialym znakiem Character.isWhiteSpace()
+   https://www.techiedelight.com/remove-whitespaces-string-java/
+
+ASCII 0-31, printable characters <---- tutaj tez jest wiekszosc whitespacow ale nie wszystkie bo jeden a mianowicie spacja
+                                       jest juz w printable characterach, spacja ma kod 32. Dodatkowo nie wszystkie
+                                       z 0-31 znakow ASCII sa whitespacjami.
+
+

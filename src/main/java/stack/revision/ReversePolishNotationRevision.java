@@ -24,7 +24,8 @@ public class ReversePolishNotationRevision {
         operations.put("*", (Integer x, Integer y) -> x * y);
         operations.put("/", (Integer x, Integer y) -> x / y);
 
-        this.operators = Set.of("+", "-", "*", "/");
+        this.operators = Set.of("+", "-", "*", "/");//To jest niepotrzebne bylo tylko po to zeby sprawdzic warunek if (operators.contains(token))
+                                                    //ale sprawdzenie warunku zanegowanego  if (!operations .contains(token)) da tez czas dostepu O(1)
 
         //Potrzebne do drugiego sposobu
         this.functions = Map.of("+", Double::sum,

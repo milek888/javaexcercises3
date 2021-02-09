@@ -38,7 +38,6 @@ public class GraterThenItsRightsRevision {
     public static List<Integer> findGreaterThenTheirRightsArray(int[] numbers) {
         int tempMax = Integer.MIN_VALUE;
         LinkedList<Integer> result = new LinkedList<>();
-
         for (int i = numbers.length - 1; i >= 0; i--) {
             if (numbers[i] > tempMax) {
                 tempMax = numbers[i];

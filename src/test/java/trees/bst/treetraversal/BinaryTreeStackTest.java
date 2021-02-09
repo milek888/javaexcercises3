@@ -10,7 +10,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
-class BinaryTreeStackTest {//TODO refactor tests
+class
+BinaryTreeStackTest {//TODO refactor tests
 
     private BinaryTreeStack binaryTreeStack;
 

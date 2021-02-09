@@ -11,24 +11,15 @@ import java.util.Stack;
 public class RemoveAdjacentDuplicatesRevision {
     public static String removeDuplicates(String S) {
 
-        ArrayDeque<Character> characters = new ArrayDeque<>();
-        if (S.length() > 0) {
-            characters.push(S.charAt(0));
-        } else {
-            return S;
-        }
-        for (int i = 1; i < S.length(); i++) {
-            if (!characters.isEmpty() && S.charAt(i) == characters.peek()) {
-                characters.pop();
+        StringBuilder characters = new StringBuilder();
+        for (int i = 0; i < S.length(); i++) {
+            if (characters.length() > 0 && S.charAt(i) == characters.charAt(characters.length()-1)) {
+                characters.deleteCharAt(characters.length()-1);
             } else {
-                characters.push(S.charAt(i));
+                characters.append(S.charAt(i));
             }
         }
-        StringBuilder result = new StringBuilder();
-
-        characters.descendingIterator()
-                .forEachRemaining(result::append);
-        return result.toString();
+        return characters.toString();
     }
 
 }

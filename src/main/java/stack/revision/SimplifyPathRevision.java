@@ -11,7 +11,7 @@ Output: "/c"
 * */
 public class SimplifyPathRevision {
 
-    public static final Set<String> MININGLESS_CHARS = Set.of("", ".");
+    public static final Set<String> IGNORED_CHARS = Set.of("", ".");
     public static final String BACK_DIRECTORY = "..";
 
     //It works assuming path
@@ -25,7 +25,7 @@ public class SimplifyPathRevision {
             if (element.equals(BACK_DIRECTORY) && !pathItemsStack.isEmpty()) {
                 pathItemsStack.pop();
             }
-            if (!element.equals(BACK_DIRECTORY) && !MININGLESS_CHARS.contains(element)) {
+            if (!element.equals(BACK_DIRECTORY) && !IGNORED_CHARS.contains(element)) {
                 pathItemsStack.push(element);
             }
         }

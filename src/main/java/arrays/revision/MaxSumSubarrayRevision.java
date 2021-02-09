@@ -1,5 +1,9 @@
 package arrays.revision;
 
+/*
+ * We have an array with integers. Find max sum of the contigues subarray.
+ * https://www.techiedelight.com/maximum-subarray-problem-kadanes-algorithm/
+ * */
 public class MaxSumSubarrayRevision {
 
     public static int calculateSum(int[] nums) {

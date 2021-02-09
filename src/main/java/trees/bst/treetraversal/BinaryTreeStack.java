@@ -31,6 +31,7 @@ public class BinaryTreeStack {
         TreeNode current = treeNode;
 
         while (!stack.isEmpty() || current != null) {
+
             if (current != null) {
                 stack.push(current);
                 current = current.getLeft();
