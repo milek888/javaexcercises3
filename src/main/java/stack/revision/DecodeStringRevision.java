@@ -1,4 +1,5 @@
-package stack;
+package stack.revision;
+
 
 import java.util.Stack;
 
@@ -18,7 +19,7 @@ import java.util.Stack;
 
    Case 2) If the current character is a letter (a-z), append it to the currentString.
 
-   Case 3) If current character is a opening bracket [, push k and currentString intocountStack and stringStack respectively.
+   Case 3) If current character is a opening bracket [, push k and currentString into countStack and stringStack respectively.
 
    Case 4) Closing bracket ]: We must begin the decoding process,
 
@@ -27,7 +28,8 @@ import java.util.Stack;
            - As the stringStack contains the previously decoded string, pop the decodedString from the stringStack. Update the decodedString = decodedString + currentK[currentString]
  *
  * */
-public class DecodeString {
+public class DecodeStringRevision {
+
     public static String decodeString(String s) {
         Stack<StringBuilder> stringStack = new Stack<>();
         Stack<Integer> numbersStack = new Stack<>();

@@ -4,7 +4,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /*
-* Anghel Leonard -> Java Coding Problems Problem 3
+* Anghel Leonard -> Java Coding Problems Problem 3,
+* 557. Reverse Words in a String III  https://leetcode.com/problems/reverse-words-in-a-string-iii/solution/
+*
 * Input is String which consists of words. Task is to revert letters for every word and
 * return String with reverted words. The order of words should be the same as the input order.
 * Example: Input: "Ala ma kota"

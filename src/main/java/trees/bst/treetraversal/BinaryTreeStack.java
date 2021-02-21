@@ -33,7 +33,7 @@ public class BinaryTreeStack {
         while (!stack.isEmpty() || current != null) {
 
             if (current != null) {
-                stack.push(current);
+                stack.push(current);//kazdy nowy wierzcholek czy to prawy czy lewy -> od razu pushujemy
                 current = current.getLeft();
             } else {
                 TreeNode node = stack.pop();
