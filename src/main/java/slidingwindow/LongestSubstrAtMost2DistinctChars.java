@@ -1,6 +1,7 @@
 package slidingwindow;
 
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +19,31 @@ import java.util.Map;
   *
 * */
 public class LongestSubstrAtMost2DistinctChars {
+
+    //lepsze rozwiazanie
+    public static int lengthOfLongestSubstringTwoDistinct2(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+
+        Map<Character, Integer> lastOccuranceMap = new HashMap<>();
+        lastOccuranceMap.put(s.charAt(0), 0);
+        int maxLength = 1;
+        int currentLength = 1;
+        int left = 0;
+        for (int right = 1; right < s.length(); right++) {
+            lastOccuranceMap.put(s.charAt(right), right);
+
+            if (lastOccuranceMap.size() > 2) {
+                int earliestIndex = Collections.min(lastOccuranceMap.values());
+                lastOccuranceMap.remove(s.charAt(earliestIndex));
+                left = earliestIndex +1;
+            }
+            currentLength = right-left+1;
+            maxLength = Math.max(maxLength, currentLength);
+        }
+        return maxLength;
+    }
 
     public static int lengthOfLongestSubstringTwoDistinct(String s) {
         if (s.length() <= 1) {

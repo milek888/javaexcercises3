@@ -20,7 +20,6 @@ public class LongestPalindromicSubstring {
     }
 
     private static String centreMax(String s, int left, int right, String max) {
-        int count = 0;
         while (left >= 0 && right < s.length()) {
             if (s.charAt(left) != s.charAt(right)) {
                 break;
@@ -28,7 +27,6 @@ public class LongestPalindromicSubstring {
             if(max.length() < s.substring(left, right+1).length()) {
                 max = s.substring(left, right+1);
             }
-            count++;
             left--;
             right++;
         }

@@ -26,4 +26,14 @@ class LongestSubstrAtMost2DistinctCharsTest {
         int actualResult = LongestSubstrAtMost2DistinctChars.lengthOfLongestSubstringTwoDistinct(input);
         Assertions.assertEquals(expectedResult, actualResult);
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "eceba, 3",
+            "ccaabbb, 5"
+    })
+    void lengthOfLongestSubstringTwoDistinct2(String input, int expectedResult) {
+        int actualResult = LongestSubstrAtMost2DistinctChars.lengthOfLongestSubstringTwoDistinct2(input);
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
 }
