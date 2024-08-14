@@ -1,9 +1,9 @@
 package dynamicprogramming.contigoussubarray;
 
 /*
-* We have an array with integers. Find max sum of the contigues subarray.
-* https://www.techiedelight.com/maximum-subarray-problem-kadanes-algorithm/
-* */
+ * We have an array with integers. Find max sum of the contigues subarray.
+ * https://www.techiedelight.com/maximum-subarray-problem-kadanes-algorithm/
+ * */
 
 public class MaxSumSubarray {
 
@@ -16,8 +16,7 @@ public class MaxSumSubarray {
         int maxSoFar = 0;
 
         for (int number : nums) {
-            maxSoFar += number;
-            maxSoFar = Integer.max(0, maxSoFar);
+            maxSoFar = Integer.max(0, maxSoFar + number);
             maxSum = Integer.max(maxSoFar, maxSum);
         }
 
@@ -32,9 +31,8 @@ public class MaxSumSubarray {
         int maxSum = nums[0];
         int maxSoFar = nums[0];
 
-        for(int i = 1; i < nums.length; ++i) {
-            maxSoFar += nums[i];
-            maxSoFar = Integer.max(nums[i], maxSoFar);
+        for (int i = 1; i < nums.length; ++i) {
+            maxSoFar = Integer.max(nums[i], maxSoFar + nums[i]);
             maxSum = Integer.max(maxSoFar, maxSum);
         }
 
@@ -47,7 +45,7 @@ public class MaxSumSubarray {
      * */
     public int maxSubArray(int[] nums) {
         int n = nums.length, maxSum = nums[0];
-        for(int i = 1; i < n; ++i) {
+        for (int i = 1; i < n; ++i) {
             if (nums[i - 1] > 0) nums[i] += nums[i - 1];
             maxSum = Math.max(nums[i], maxSum);
         }
